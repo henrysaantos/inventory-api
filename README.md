@@ -1,7 +1,7 @@
-#inventory-api
+# inventory-api
 Essa api permite qualquer desenvolvedor criar inventários para seus plugins com muita facilidade.
 
-###Por que usar essa api?
+### Por que usar essa api?
  - Seus inventários serem atualizados automaticamente com um tempo definido por você;
  - Existem 3 tipos diferentes de inventários, que são eles: únicos, paginados e globais;
  - Ações individuais para cada tipo de clique e ações padrões para cliques não registrados;
@@ -11,8 +11,8 @@ Essa api permite qualquer desenvolvedor criar inventários para seus plugins com
  - Visualizadores podem ter propriedades customizadas definidas;
  - É fácil de usar e é código aberto;
  
- ###Instalação
- ####Maven
+ ### Instalação
+ #### Maven
  ```html
  <!-- Adiciona o repositório jitpack para o projeto -->
  <repository>
@@ -27,7 +27,7 @@ Essa api permite qualquer desenvolvedor criar inventários para seus plugins com
  	<version>$version</version>
  </dependency>
  ```
- ####Gradle
+ #### Gradle
 ```gradle
 // Adiciona o repositório jitpack para o projeto
 allprojects {
@@ -44,5 +44,5 @@ dependencies {
 ```
 **As versões disponíveis para utilização estão listadas em: [jitpack.io](https://jitpack.io/#HenryFabio/inventory-api).**
 
-###Modo de uso
+### Modo de uso
 Ainda não disponível.
