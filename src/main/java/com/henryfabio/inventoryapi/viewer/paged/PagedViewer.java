@@ -123,7 +123,13 @@ public final class PagedViewer extends IViewerImpl {
             inventoryItems.add(index < maxItems ? pagesItems.get(index) : null);
             index++;
         }
+        if (inventoryItems.isEmpty()) editor.setItem(getMiddleSlot(), DefaultItem.EMPTY);
         editor.fillCenter(inventoryItems, borderSize);
+    }
+
+    private int getMiddleSlot() {
+        int size = getInventorySize();
+        return size - (size / 2);
     }
 
 }

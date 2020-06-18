@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Collections;
 import java.util.function.Supplier;
 
 /**
@@ -67,6 +68,17 @@ public enum DefaultItem {
                     if (!viewer.openBackInventory())
                         click.getPlayer().sendMessage("§cNão foi possivel encontrar um inventário para voltar.");
                 });
+    }),
+    EMPTY(() -> {
+        ItemStack itemStack = new ItemStack(Material.WEB);
+
+        ItemMeta meta = itemStack.getItemMeta();
+        meta.setDisplayName("§cNada por aqui.");
+        meta.setLore(Collections.singletonList("§7Não há nada para mostrar aqui. =("));
+
+        itemStack.setItemMeta(meta);
+
+        return new InventoryItem(itemStack);
     });
 
     private final Supplier<InventoryItem> supplier;
