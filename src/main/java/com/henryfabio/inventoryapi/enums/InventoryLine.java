@@ -13,9 +13,14 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum InventoryLine {
 
-    ONE(1, 0), TWO(2, 9), THREE(3, 18), FOR(4, 27), FIVE(5, 36), SIX(6, 45);
+    ONE(1, 0, 4),
+    TWO(2, 9, 4),
+    THREE(3, 18, 13),
+    FOR(4, 27, 13),
+    FIVE(5, 36, 22),
+    SIX(6, 45, 22);
 
-    private final int line, startIndex;
+    private final int line, startIndex, middleSlot;
 
     public static InventoryLine valueOf(int line) {
         return Arrays.stream(values())

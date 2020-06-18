@@ -1,5 +1,6 @@
 package com.henryfabio.inventoryapi.viewer.paged;
 
+import com.henryfabio.inventoryapi.enums.InventoryLine;
 import com.henryfabio.inventoryapi.inventory.CustomInventory;
 import com.henryfabio.inventoryapi.inventory.paged.PagedInventory;
 import com.henryfabio.inventoryapi.item.InventoryItem;
@@ -32,12 +33,12 @@ public final class PagedViewer extends IViewerImpl {
         super(name, customInventory);
     }
 
-//    @Override
-//    public void createInventory() {
-//        super.createInventory();
-//        updatePagesItems();
-//        addDefaultItems();
-//    }
+    @Override
+    public void createInventory() {
+        super.createInventory();
+        updatePagesItems();
+        addDefaultItems();
+    }
 
     public void nextPage() {
         if (hasNextPage()) changePage(getNextPage());
@@ -72,7 +73,8 @@ public final class PagedViewer extends IViewerImpl {
 
     public void updatePagesItems() {
         PagedInventory pagedInventory = (PagedInventory) getCustomInventory();
-        this.pagesItems = pagedInventory.getPagesItems(this);
+        this.pagesItems.clear();
+        this.pagesItems.addAll(pagedInventory.getPagesItems(this));
         changePage(currentPage);
     }
 
@@ -118,18 +120,17 @@ public final class PagedViewer extends IViewerImpl {
         int index = getInventoryIndex();
         int maxItems = getInventoryMaxItems();
 
-        List<InventoryItem> inventoryItems = new LinkedList<>();
-        for (int i = 0; i < itemsPerPage; i++) {
-            inventoryItems.add(index < maxItems ? pagesItems.get(index) : null);
-            index++;
-        }
-        if (inventoryItems.isEmpty()) editor.setItem(getMiddleSlot(), DefaultItem.EMPTY);
-        editor.fillCenter(inventoryItems, borderSize);
-    }
+        if (pagesItems.isEmpty()) {
+            editor.setItem(InventoryLine.valueOf(getInventorySize() / 9).getMiddleSlot(), DefaultItem.EMPTY);
+        } else {
+            List<InventoryItem> inventoryItems = new LinkedList<>();
+            for (int i = 0; i < itemsPerPage; i++) {
+                inventoryItems.add(index < maxItems ? pagesItems.get(index) : null);
+                index++;
+            }
 
-    private int getMiddleSlot() {
-        int size = getInventorySize();
-        return size - (size / 2);
+            editor.fillCenter(inventoryItems, borderSize);
+        }
     }
 
 }
