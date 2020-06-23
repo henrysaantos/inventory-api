@@ -9,6 +9,8 @@ import com.henryfabio.inventoryapi.viewer.IViewerImpl;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -120,16 +122,23 @@ public final class PagedViewer extends IViewerImpl {
         int index = getInventoryIndex();
         int maxItems = getInventoryMaxItems();
 
-        if (pagesItems.isEmpty()) {
-            editor.setItem(InventoryLine.valueOf(getInventorySize() / 9).getMiddleSlot(), DefaultItem.EMPTY);
-        } else {
-            List<InventoryItem> inventoryItems = new LinkedList<>();
+        List<InventoryItem> inventoryItems = new LinkedList<>();
+
+        if (!pagesItems.isEmpty()) {
             for (int i = 0; i < itemsPerPage; i++) {
                 inventoryItems.add(index < maxItems ? pagesItems.get(index) : null);
                 index++;
             }
 
             editor.fillCenter(inventoryItems, borderSize);
+        } else {
+            editor.fillCenter(inventoryItems, borderSize);
+
+            for (int i = 0; i < itemsPerPage; i++) {
+                inventoryItems.add(new InventoryItem(new ItemStack(Material.AIR)));
+            }
+
+            editor.setItem(InventoryLine.valueOf(getInventorySize() / 9).getMiddleSlot(), DefaultItem.EMPTY);
         }
     }
 
