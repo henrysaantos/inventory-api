@@ -132,11 +132,10 @@ public final class PagedViewer extends IViewerImpl {
 
             editor.fillCenter(inventoryItems, borderSize);
         } else {
-            editor.fillCenter(inventoryItems, borderSize);
-
             for (int i = 0; i < itemsPerPage; i++) {
                 inventoryItems.add(new InventoryItem(new ItemStack(Material.AIR)));
             }
+            editor.fillCenter(inventoryItems, borderSize);
 
             editor.setItem(InventoryLine.valueOf(getInventorySize() / 9).getMiddleSlot(), DefaultItem.EMPTY);
         }
