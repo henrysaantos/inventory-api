@@ -37,6 +37,8 @@ public interface CustomInventory {
 
     void updateInventory(IViewer viewer);
 
+    void updateInventory(Player player);
+
     void addViewer(IViewer viewer);
 
     void removeViewer(IViewer viewer);

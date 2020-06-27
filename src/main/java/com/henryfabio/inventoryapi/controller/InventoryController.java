@@ -16,7 +16,7 @@ import java.util.Map;
 public final class InventoryController {
 
     private final Map<String, CustomInventory> inventories = new HashMap<>();
-    private final Map<String, Map<String, IViewer>> cachedViewers = new LinkedHashMap<>();
+    private final Map<String, Map<String, IViewer>> viewers = new LinkedHashMap<>();
     private final Map<String, String> playerOpenedInventories = new HashMap<>();
 
     public void registerInventory(CustomInventory customInventory) {
@@ -24,22 +24,22 @@ public final class InventoryController {
     }
 
     public void cacheViewer(IViewer viewer) {
-        Map<String, IViewer> viewers = cachedViewers.computeIfAbsent(viewer.getName(), k -> new LinkedHashMap<>());
+        Map<String, IViewer> viewers = this.viewers.computeIfAbsent(viewer.getName(), k -> new LinkedHashMap<>());
         viewers.put(viewer.getInventoryIdentifier(), viewer);
     }
 
     public void uncacheViewer(IViewer viewer) {
-        Map<String, IViewer> viewers = cachedViewers.get(viewer.getName());
+        Map<String, IViewer> viewers = this.viewers.get(viewer.getName());
         if (viewers != null) viewers.remove(viewer.getInventoryIdentifier());
     }
 
-    public IViewer getCachedViewer(String playerName, String inventoryIdentifier) {
-        Map<String, IViewer> viewers = cachedViewers.get(playerName);
+    public IViewer getViewer(String playerName, String inventoryIdentifier) {
+        Map<String, IViewer> viewers = this.viewers.get(playerName);
         return viewers != null ? viewers.get(inventoryIdentifier) : null;
     }
 
-    public <T extends IViewer> T getCachedViewer(String playerName, CustomInventory customInventory) {
-        return (T) getCachedViewer(playerName, customInventory.getIdentifier());
+    public <T extends IViewer> T getViewer(String playerName, CustomInventory customInventory) {
+        return (T) getViewer(playerName, customInventory.getIdentifier());
     }
 
     public CustomInventory getInventory(String identifier) {
@@ -60,8 +60,8 @@ public final class InventoryController {
         return ImmutableMap.copyOf(inventories);
     }
 
-    public Map<String, Map<String, IViewer>> getCachedViewers() {
-        return ImmutableMap.copyOf(cachedViewers);
+    public Map<String, Map<String, IViewer>> getViewers() {
+        return ImmutableMap.copyOf(viewers);
     }
 
 }

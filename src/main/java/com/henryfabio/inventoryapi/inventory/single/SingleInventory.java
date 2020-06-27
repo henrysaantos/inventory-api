@@ -24,7 +24,7 @@ public abstract class SingleInventory extends CustomInventoryImpl {
         String playerName = player.getName();
         boolean resultOfCache = true;
 
-        SingleViewer viewer = inventoryController.getCachedViewer(playerName, this);
+        SingleViewer viewer = inventoryController.getViewer(playerName, this);
         if (viewer == null) {
             resultOfCache = false;
             viewer = new SingleViewer(playerName, this);

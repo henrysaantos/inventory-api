@@ -43,6 +43,10 @@ public interface IViewer extends ViewerProperties {
 
     String getBackInventory();
 
+    default boolean hasBackInventory() {
+        return getBackInventory() != null;
+    }
+
     default boolean openBackInventory() {
         String backInventory = getBackInventory();
 

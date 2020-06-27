@@ -29,7 +29,7 @@ public final class UpdaterRunnable implements Runnable {
     @Override
     public void run() {
         Map<String, Set<IViewer>> inventoryViewers = new LinkedHashMap<>();
-        controller.getCachedViewers().values().forEach(map ->
+        controller.getViewers().values().forEach(map ->
                 map.forEach((identifier, viewer) -> {
                     if (!(viewer instanceof GlobalViewer)) {
                         Set<IViewer> viewers = inventoryViewers.computeIfAbsent(identifier, k -> new LinkedHashSet<>());

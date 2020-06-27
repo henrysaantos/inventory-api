@@ -58,13 +58,26 @@ public final class PagedViewer extends IViewerImpl {
         return currentPage - 1;
     }
 
-    public boolean hasNextPage() {
-        int maxItems = getInventoryMaxItems();
+    public boolean hasNextPage(int currentPage) {
+        int maxItems = getInventoryMaxItems(currentPage);
         return maxItems > (itemsPerPage - 1) && maxItems != pagesItems.size();
+    }
+
+    public boolean hasNextPage() {
+        return hasNextPage(currentPage);
     }
 
     public boolean hasPreviousPage() {
         return currentPage > 1;
+    }
+
+    public int getEndPage() {
+        int endPage = 1;
+
+        while (hasNextPage(endPage))
+            endPage++;
+
+        return endPage;
     }
 
     public void changePage(int page) {
@@ -77,15 +90,23 @@ public final class PagedViewer extends IViewerImpl {
         PagedInventory pagedInventory = (PagedInventory) getCustomInventory();
         this.pagesItems.clear();
         this.pagesItems.addAll(pagedInventory.getPagesItems(this));
-        changePage(currentPage);
+        changePage(Math.min(getEndPage(), currentPage));
     }
 
-    public int getInventoryIndex() {
+    public int getInventoryIndex(int currentPage) {
         return (currentPage * itemsPerPage) - itemsPerPage;
     }
 
+    public int getInventoryIndex() {
+        return getInventoryIndex(currentPage);
+    }
+
+    public int getInventoryMaxItems(int currentPage) {
+        return Math.min(getInventoryIndex(currentPage) + itemsPerPage, pagesItems.size());
+    }
+
     public int getInventoryMaxItems() {
-        return Math.min(getInventoryIndex() + itemsPerPage, pagesItems.size());
+        return getInventoryMaxItems(currentPage);
     }
 
     public void generateSettings() {
@@ -114,8 +135,8 @@ public final class PagedViewer extends IViewerImpl {
     }
 
     public void addDefaultItems() {
-        editor.setItem(previousPageItemSlot, hasPreviousPage() ? DefaultItem.PREVIOUS_PAGE : null);
-        editor.setItem(nextPageItemSlot, hasNextPage() ? DefaultItem.NEXT_PAGE : null);
+        editor.setItem(previousPageItemSlot, hasPreviousPage() ? DefaultItem.PREVIOUS_PAGE.getInventoryItem(this) : null);
+        editor.setItem(nextPageItemSlot, hasNextPage() ? DefaultItem.NEXT_PAGE.getInventoryItem(this) : null);
     }
 
     public void addPageItems() {
@@ -132,12 +153,14 @@ public final class PagedViewer extends IViewerImpl {
 
             editor.fillCenter(inventoryItems, borderSize);
         } else {
-            for (int i = 0; i < itemsPerPage; i++) {
-                inventoryItems.add(new InventoryItem(new ItemStack(Material.AIR)));
-            }
-            editor.fillCenter(inventoryItems, borderSize);
+            if (((PagedInventory) getCustomInventory()).isDefaultEmptyItem()) {
+                for (int i = 0; i < itemsPerPage; i++) {
+                    inventoryItems.add(new InventoryItem(new ItemStack(Material.AIR)));
+                }
+                editor.fillCenter(inventoryItems, borderSize);
 
-            editor.setItem(InventoryLine.valueOf(getInventorySize() / 9).getMiddleSlot(), DefaultItem.EMPTY);
+                editor.setItem(InventoryLine.valueOf(getInventorySize() / 9).getMiddleSlot(), DefaultItem.EMPTY.getInventoryItem());
+            }
         }
     }
 

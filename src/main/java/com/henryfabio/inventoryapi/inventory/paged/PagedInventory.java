@@ -6,6 +6,8 @@ import com.henryfabio.inventoryapi.inventory.CustomInventoryImpl;
 import com.henryfabio.inventoryapi.item.InventoryItem;
 import com.henryfabio.inventoryapi.viewer.IViewer;
 import com.henryfabio.inventoryapi.viewer.paged.PagedViewer;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -15,7 +17,10 @@ import java.util.function.Consumer;
  * @author Henry Fábio
  * Github: https://github.com/HenryFabio
  */
+@Getter
 public abstract class PagedInventory extends CustomInventoryImpl {
+
+    @Setter private boolean defaultEmptyItem = true;
 
     public PagedInventory(String identifier, String title, InventoryLine line) {
         super(identifier, title, line);
@@ -24,7 +29,7 @@ public abstract class PagedInventory extends CustomInventoryImpl {
     @Override
     public IViewer openInventory(Player player, Consumer<IViewer> consumer) {
         boolean resultOfCache = true;
-        PagedViewer viewer = inventoryController.getCachedViewer(player.getName(), this);
+        PagedViewer viewer = inventoryController.getViewer(player.getName(), this);
         if (viewer == null) {
             resultOfCache = false;
             viewer = new PagedViewer(player.getName(), this);

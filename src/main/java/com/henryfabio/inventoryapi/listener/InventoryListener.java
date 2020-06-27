@@ -77,7 +77,7 @@ public final class InventoryListener implements Listener {
 
     private IViewer getEventViewer(HumanEntity entity) {
         String entityName = entity.getName();
-        return controller.getCachedViewer(entityName, controller.getOpenedInventory(entityName));
+        return controller.getViewer(entityName, controller.getOpenedInventory(entityName));
     }
 
 }

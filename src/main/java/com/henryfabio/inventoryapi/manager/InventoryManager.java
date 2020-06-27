@@ -23,7 +23,7 @@ public final class InventoryManager {
     private final InventoryController controller;
     private final ItemCache itemCache;
 
-    public static InventoryManager enbale(Plugin owner) {
+    public static InventoryManager enable(Plugin owner) {
         if (instance == null) {
             InventoryManager.instance = new InventoryManager(
                     owner,

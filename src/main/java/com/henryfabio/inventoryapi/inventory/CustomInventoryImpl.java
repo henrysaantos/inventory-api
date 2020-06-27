@@ -3,6 +3,7 @@ package com.henryfabio.inventoryapi.inventory;
 import com.henryfabio.inventoryapi.controller.InventoryController;
 import com.henryfabio.inventoryapi.editor.InventoryEditor;
 import com.henryfabio.inventoryapi.enums.InventoryLine;
+import com.henryfabio.inventoryapi.inventory.feature.BackInventory;
 import com.henryfabio.inventoryapi.item.ItemCache;
 import com.henryfabio.inventoryapi.manager.InventoryManager;
 import com.henryfabio.inventoryapi.viewer.IViewer;
@@ -34,7 +35,7 @@ public abstract class CustomInventoryImpl implements CustomInventory {
     private final int size;
 
     @Setter private int updateTime = 0;
-    @Setter private boolean cached = true;
+    @Setter private boolean cached = false;
 
     public CustomInventoryImpl(String identifier, String title, InventoryLine line) {
         this.identifier = identifier;
@@ -50,6 +51,12 @@ public abstract class CustomInventoryImpl implements CustomInventory {
     }
 
     @Override
+    public void updateInventory(Player player) {
+        IViewer viewer = inventoryController.getViewer(player.getName(), identifier);
+        if (viewer != null) updateInventory(viewer);
+    }
+
+    @Override
     public void addViewer(IViewer viewer) {
         inventoryController.setOpenedInventory(viewer.getName(), getIdentifier());
         inventoryController.cacheViewer(viewer);
@@ -62,6 +69,12 @@ public abstract class CustomInventoryImpl implements CustomInventory {
     }
 
     protected void defaultInventoryOpen(Player player, IViewer viewer, boolean resultOfCache) {
+        String lastInventoryIdentifier = inventoryController.getOpenedInventory(player.getName());
+        if (lastInventoryIdentifier != null) {
+            CustomInventory lastInventory = inventoryController.getInventory(lastInventoryIdentifier);
+            if (lastInventory instanceof BackInventory) viewer.setBackInventory(lastInventoryIdentifier);
+        }
+
         Inventory inventory = resultOfCache ? viewer.getInventory() : null;
         if (inventory == null) {
             onCreate(viewer);

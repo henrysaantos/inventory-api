@@ -3,7 +3,6 @@ package com.henryfabio.inventoryapi.editor;
 import com.henryfabio.inventoryapi.enums.InventoryLine;
 import com.henryfabio.inventoryapi.item.InventoryItem;
 import com.henryfabio.inventoryapi.item.callback.ItemCallback;
-import com.henryfabio.inventoryapi.item.enums.DefaultItem;
 import com.henryfabio.inventoryapi.manager.InventoryManager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -25,10 +24,6 @@ interface IInventoryEditor {
 
     default void setItem(int slot, String itemName) {
         setItem(slot, InventoryManager.getManager().getItemCache().getItem(itemName));
-    }
-
-    default void setItem(int slot, DefaultItem defaultItem) {
-        setItem(slot, InventoryManager.getManager().getItemCache().getItem(defaultItem));
     }
 
     void fill(InventoryItem inventoryItem);
