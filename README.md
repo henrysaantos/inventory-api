@@ -6,8 +6,7 @@ Essa api permite qualquer desenvolvedor criar inventários para seus plugins com
  - Existem 3 tipos diferentes de inventários, que são eles: únicos, paginados e globais;
  - Ações individuais para cada tipo de clique e ações padrões para cliques não registrados;
  - Eventos customizados facilitando incrementações extras;
- - Cacheamento para itens padrões (avançar página, fechar inventário, painéis de vidro) que você pode também pode adicionar outros;
- - Editor de inventário com métodos facilitando os moldes nos mesmos (centralizar itens, inserir itens em colunas ou linhas, etc.);
+ - Editor de inventário com métodos facilitando os moldes nos mesmos (centralizar itens, inserir itens em colunas ou linhas etc.);
  - Visualizadores podem ter propriedades customizadas definidas;
  - É fácil de usar e é código aberto;
  
@@ -45,4 +44,4 @@ dependencies {
 **As versões disponíveis para utilização estão listadas em: [jitpack.io](https://jitpack.io/#HenryFabio/inventory-api).**
 
 ### Modo de uso
-Ainda não disponível.
+[Clique aqui para acessar o modo de uso desta api](https://github.com/HenryFabio/inventory-api/wiki/%231-Modo-de-Uso)
