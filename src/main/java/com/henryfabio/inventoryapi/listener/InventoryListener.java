@@ -13,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.function.Consumer;
 
@@ -67,12 +66,6 @@ public final class InventoryListener implements Listener {
 
             if (clickCallback != null) clickCallback.accept(clickEvent);
         }
-    }
-
-    @EventHandler
-    private void onPlayerQuit(PlayerQuitEvent event) {
-        IViewer viewer = getEventViewer(event.getPlayer());
-        if (viewer != null) controller.uncacheViewer(viewer);
     }
 
     private IViewer getEventViewer(HumanEntity entity) {

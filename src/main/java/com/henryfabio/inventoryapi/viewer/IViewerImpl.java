@@ -6,6 +6,7 @@ import com.henryfabio.inventoryapi.enums.InventoryLine;
 import com.henryfabio.inventoryapi.inventory.CustomInventory;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
@@ -17,6 +18,7 @@ import java.util.Map;
  * Github: https://github.com/HenryFabio
  */
 @Getter
+@ToString(of = {"name", "inventoryIdentifier"})
 public abstract class IViewerImpl implements IViewer {
 
     private final String

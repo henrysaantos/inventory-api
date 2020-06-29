@@ -39,18 +39,18 @@ public final class UpdaterRunnable implements Runnable {
         );
 
         controller.getInventories().forEach((identifier, customInventory) -> {
-            if (customInventory.isCached() && customInventory.hasAutomaticUpdate()) {
-                if (updateSecond % customInventory.getUpdateTime() == 0) {
-                    if (customInventory instanceof GlobalInventory) {
-                        GlobalInventory globalInventory = (GlobalInventory) customInventory;
-                        if (globalInventory.isCreated()) globalInventory.updateInventory();
-                    } else {
-                        Set<IViewer> viewers = inventoryViewers.remove(identifier);
-                        if (viewers != null) viewers.forEach(customInventory::updateInventory);
-                    }
+            if (customInventory.hasAutomaticUpdate() && updateSecond % customInventory.getUpdateTime() == 0) {
+                if (customInventory instanceof GlobalInventory) {
+                    GlobalInventory globalInventory = (GlobalInventory) customInventory;
+                    if (globalInventory.isCreated()) globalInventory.updateInventory();
+                } else {
+                    Set<IViewer> viewers = inventoryViewers.remove(identifier);
+                    if (viewers != null) viewers.forEach(customInventory::updateInventory);
                 }
             }
         });
+
+        updateSecond++;
     }
 
 }
