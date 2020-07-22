@@ -35,6 +35,8 @@ public abstract class PagedInventory extends CustomInventoryImpl {
             viewer = new PagedViewer(player.getName(), this);
         } else viewer.changePage(1);
 
+        if (consumer != null) consumer.accept(viewer);
+
         defaultInventoryOpen(player, viewer, resultOfCache);
         return viewer;
     }
