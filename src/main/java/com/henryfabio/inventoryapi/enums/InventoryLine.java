@@ -16,7 +16,7 @@ public enum InventoryLine {
     ONE(1, 0, 4),
     TWO(2, 9, 4),
     THREE(3, 18, 13),
-    FOR(4, 27, 13),
+    FOUR(4, 27, 13),
     FIVE(5, 36, 22),
     SIX(6, 45, 22);
 
