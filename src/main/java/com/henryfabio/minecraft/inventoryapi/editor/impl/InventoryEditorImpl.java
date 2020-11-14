@@ -71,15 +71,14 @@ public final class InventoryEditorImpl implements InventoryEditor {
 
     @Override
     public void fillCenter(InventoryItem inventoryItem, int borderLimit) {
-        int borderSize = 0;
-        for (int i = 9; borderLimit > 0; i -= 2, borderLimit--) {
-            borderSize += (i * 2) + ((i - 5) * 2);
-        }
+        int lines = inventory.getSize() / 9;
+        int borderSize = ((9 - borderLimit) * (lines - 2)) - 1;
 
         List<InventoryItem> inventoryItems = new LinkedList<>();
         for (int i = 0; i < borderSize; i++) inventoryItems.add(inventoryItem);
         this.fillPage(inventoryItems, borderLimit);
     }
+
 
     @Override
     public void fillColumn(int column, InventoryItem inventoryItem) {

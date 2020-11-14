@@ -111,7 +111,7 @@ public final class PagedViewer extends ViewerImpl {
 
         configuration.border(1);
 
-        int emptyPageSlot = inventoryLines;
+        int emptyPageSlot = configuration.inventorySize();
         if (emptyPageSlot % 2 == 0) emptyPageSlot -= 9;
         configuration.emptyPageSlot(emptyPageSlot / 2);
 

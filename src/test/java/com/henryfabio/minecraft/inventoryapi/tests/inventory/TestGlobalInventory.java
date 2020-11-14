@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Crops;
 
 /**
  * @author Henry Fábio
@@ -15,12 +16,22 @@ import org.bukkit.inventory.ItemStack;
 public final class TestGlobalInventory extends GlobalInventory {
 
     public TestGlobalInventory() {
-        super("test.inventory.global", "&8GlobalInventory", 9 * 3);
+        super(
+                "test.inventory.global", // Identificador do inventário (deve ser único)
+                "&8GlobalInventory", // Título padrão do inventário
+                9 * 3 // Tamanho do inventário
+        );
+
         configuration(configuration -> {
             configuration.secondUpdate(1);
         });
     }
 
+    /**
+     * Método utilizado para configurar os itens do inventário.
+     *
+     * @param editor editor do inventário
+     */
     @Override
     protected void configureInventory(InventoryEditor editor) {
         editor.setItem(13, InventoryItem.of(
