@@ -39,6 +39,10 @@ public final class CustomInventoryListener implements Listener {
         ViewerController viewerController = InventoryManager.getViewerController();
         viewerController.findViewer(player.getName()).ifPresent(viewer -> {
             event.setCancelled(true);
+
+            CustomInventoryClickEvent clickEvent = new CustomInventoryClickEvent(viewer, event);
+            Bukkit.getPluginManager().callEvent(clickEvent);
+
             if (clickedInventory.getType().equals(InventoryType.PLAYER)) return;
 
             InventoryEditor editor = viewer.getEditor();
@@ -46,12 +50,8 @@ public final class CustomInventoryListener implements Listener {
             if (itemCallback == null) return;
 
             Consumer<CustomInventoryClickEvent> callback = itemCallback.getClickCallback(event.getClick());
-            if (callback == null) callback = itemCallback.getClickCallback(null);
-
             if (callback != null) {
-                CustomInventoryClickEvent clickEvent = new CustomInventoryClickEvent(viewer, event);
                 callback.accept(clickEvent);
-                Bukkit.getPluginManager().callEvent(clickEvent);
             }
         });
     }

@@ -24,7 +24,7 @@ public final class ItemCallback {
     }
 
     public Consumer<CustomInventoryClickEvent> getClickCallback(ClickType clickType) {
-        return this.callbackMap.get(clickType);
+        return this.callbackMap.getOrDefault(clickType, this.callbackMap.get(null));
     }
 
 }
