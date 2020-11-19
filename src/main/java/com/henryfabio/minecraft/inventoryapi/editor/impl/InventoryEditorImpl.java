@@ -66,7 +66,6 @@ public final class InventoryEditorImpl implements InventoryEditor {
         int height = border.getTop();
         for (InventoryItem item : inventoryItems) {
             int itemSlot = inventory.getSize() > 9 ? width + 9 * height : width;
-            System.out.println(itemSlot);
             setItem(itemSlot, item);
 
             if (++width == (9 - border.getRight())) {
