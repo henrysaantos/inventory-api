@@ -19,18 +19,17 @@ repositories {
     maven { url = 'https://oss.sonatype.org/content/groups/public/' }
 }
 
-def spigotDependency = 'org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT'
-def lombokDependency = 'org.projectlombok:lombok:1.18.12'
-
 dependencies {
-    compileOnly spigotDependency
-    testCompileOnly spigotDependency
+    def spigot = 'org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT'
+    compileOnly spigot
+    testCompileOnly spigot
 
-    compileOnly lombokDependency
-    annotationProcessor lombokDependency
+    def lombok = 'org.projectlombok:lombok:1.18.12'
+    compileOnly lombok
+    annotationProcessor lombok
 
-    testCompileOnly lombokDependency
-    testAnnotationProcessor lombokDependency
+    testCompileOnly lombok
+    testAnnotationProcessor lombok
 }
 
 processResources {
