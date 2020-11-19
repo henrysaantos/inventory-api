@@ -3,7 +3,6 @@ package com.henryfabio.minecraft.inventoryapi.inventory.impl.paged;
 import com.henryfabio.minecraft.inventoryapi.editor.InventoryEditor;
 import com.henryfabio.minecraft.inventoryapi.inventory.configuration.impl.InventoryConfigurationImpl;
 import com.henryfabio.minecraft.inventoryapi.inventory.impl.CustomInventoryImpl;
-import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.item.supplier.InventoryItemSupplier;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;

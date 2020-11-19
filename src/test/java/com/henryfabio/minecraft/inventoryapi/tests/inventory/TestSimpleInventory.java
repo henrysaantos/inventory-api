@@ -5,7 +5,6 @@ import com.henryfabio.minecraft.inventoryapi.inventory.impl.simple.SimpleInvento
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.ViewerConfiguration;
-import com.henryfabio.minecraft.inventoryapi.viewer.configuration.impl.ViewerConfigurationImpl;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.simple.SimpleViewer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

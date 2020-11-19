@@ -4,6 +4,7 @@ import com.henryfabio.minecraft.inventoryapi.inventory.CustomInventory;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.item.enums.DefaultItem;
 import com.henryfabio.minecraft.inventoryapi.item.supplier.InventoryItemSupplier;
+import com.henryfabio.minecraft.inventoryapi.viewer.configuration.border.Border;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.impl.ViewerConfigurationImpl;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.ViewerImpl;
 import lombok.EqualsAndHashCode;
@@ -57,7 +58,7 @@ public final class PagedViewer extends ViewerImpl {
 
     public void insertPageItems() {
         ViewerConfigurationImpl.Paged configuration = this.getConfiguration();
-        int border = configuration.border();
+        Border border = configuration.border();
         if (this.pageItemList.isEmpty()) {
             InventoryItem emptyInventoryItem = InventoryItem.of(new ItemStack(Material.AIR));
             editor.fillCenter(emptyInventoryItem, border);
@@ -109,7 +110,7 @@ public final class PagedViewer extends ViewerImpl {
         ViewerConfigurationImpl.Paged configuration = this.getConfiguration();
         int inventoryLines = configuration.inventorySize() / 9;
 
-        configuration.border(1);
+        configuration.border(Border.of(1));
 
         int emptyPageSlot = configuration.inventorySize();
         if (emptyPageSlot % 2 == 0) emptyPageSlot -= 9;

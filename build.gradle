@@ -4,7 +4,7 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group = 'com.henryfabio'
-version = '2.0.0-SNAPSHOT'
+version = '2.0.2-SNAPSHOT'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'

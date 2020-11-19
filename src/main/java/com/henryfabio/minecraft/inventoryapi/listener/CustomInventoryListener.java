@@ -1,6 +1,5 @@
 package com.henryfabio.minecraft.inventoryapi.listener;
 
-import com.henryfabio.minecraft.inventoryapi.controller.InventoryController;
 import com.henryfabio.minecraft.inventoryapi.controller.ViewerController;
 import com.henryfabio.minecraft.inventoryapi.editor.InventoryEditor;
 import com.henryfabio.minecraft.inventoryapi.event.impl.CustomInventoryClickEvent;
@@ -15,9 +14,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 /**
@@ -32,7 +28,7 @@ public final class CustomInventoryListener implements Listener {
         ViewerController viewerController = InventoryManager.getViewerController();
         viewerController.unregisterViewer(player.getName());
     }
-    
+
     @EventHandler
     private void onInventoryClick(InventoryClickEvent event) {
         Inventory clickedInventory = event.getClickedInventory();

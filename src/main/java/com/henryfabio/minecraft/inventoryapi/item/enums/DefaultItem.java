@@ -1,20 +1,16 @@
 package com.henryfabio.minecraft.inventoryapi.item.enums;
 
-import com.google.common.base.Suppliers;
 import com.henryfabio.minecraft.inventoryapi.controller.InventoryController;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.function.Supplier;
 
 /**
  * @author Henry Fábio

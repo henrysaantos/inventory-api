@@ -5,11 +5,15 @@ import com.henryfabio.minecraft.inventoryapi.editor.InventoryEditor;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.item.callback.ItemCallback;
 import com.henryfabio.minecraft.inventoryapi.item.callback.update.ItemUpdateCallback;
+import com.henryfabio.minecraft.inventoryapi.viewer.configuration.border.Border;
 import lombok.Data;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Henry Fábio
@@ -55,28 +59,28 @@ public final class InventoryEditorImpl implements InventoryEditor {
     }
 
     @Override
-    public void fillPage(List<InventoryItem> inventoryItems, int borderLimit) {
-        int width = borderLimit;
-        int height = 1;
+    public void fillPage(List<InventoryItem> inventoryItems, Border border) {
+        int bottomLimit = (inventory.getSize() / 9) - border.getBottom();
+
+        int width = border.getLeft();
+        int height = border.getTop();
         for (InventoryItem item : inventoryItems) {
             int itemSlot = inventory.getSize() > 9 ? width + 9 * height : width;
+            System.out.println(itemSlot);
             setItem(itemSlot, item);
 
-            if (++width == (9 - borderLimit)) {
-                width = borderLimit;
-                ++height;
+            if (++width == (9 - border.getRight())) {
+                width = border.getLeft();
+                if (++height >= bottomLimit) break;
             }
         }
     }
 
     @Override
-    public void fillCenter(InventoryItem inventoryItem, int borderLimit) {
-        int lines = inventory.getSize() / 9;
-        int borderSize = ((9 - borderLimit) * (lines - 2)) - 1;
-
+    public void fillCenter(InventoryItem inventoryItem, Border border) {
         List<InventoryItem> inventoryItems = new LinkedList<>();
-        for (int i = 0; i < borderSize; i++) inventoryItems.add(inventoryItem);
-        this.fillPage(inventoryItems, borderLimit);
+        for (int i = 0; i < inventory.getSize(); i++) inventoryItems.add(inventoryItem);
+        this.fillPage(inventoryItems, border);
     }
 
 

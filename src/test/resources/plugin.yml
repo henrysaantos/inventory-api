@@ -1,4 +1,4 @@
 name: inventory-api
 version: 1.0
 main: com.henryfabio.minecraft.inventoryapi.tests.Main
-authors: [Henry_Fabio]
+authors: [ Henry_Fabio ]

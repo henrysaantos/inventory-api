@@ -1,6 +1,7 @@
 package com.henryfabio.minecraft.inventoryapi.viewer.configuration.impl;
 
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.ViewerConfiguration;
+import com.henryfabio.minecraft.inventoryapi.viewer.configuration.border.Border;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +28,8 @@ public abstract class ViewerConfigurationImpl implements ViewerConfiguration {
     public static class Paged extends ViewerConfigurationImpl {
 
         private int itemPageLimit;
-        private int border;
+        private Border border;
+
         private int nextPageSlot;
         private int previousPageSlot;
         private int emptyPageSlot;

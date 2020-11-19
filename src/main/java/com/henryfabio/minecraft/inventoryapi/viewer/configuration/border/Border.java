@@ -8,10 +8,10 @@ import lombok.Data;
 @Data(staticConstructor = "of")
 public final class Border {
 
-    public final int top;
-    public final int left;
-    public final int bottom;
-    public final int right;
+    private final int top;
+    private final int left;
+    private final int bottom;
+    private final int right;
 
     public static Border of(int value) {
         return Border.of(value, value, value, value);

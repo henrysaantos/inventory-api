@@ -4,12 +4,9 @@ import com.henryfabio.minecraft.inventoryapi.event.impl.CustomInventoryClickEven
 import com.henryfabio.minecraft.inventoryapi.item.callback.ItemCallback;
 import com.henryfabio.minecraft.inventoryapi.item.callback.update.ItemUpdateCallback;
 import lombok.Data;
-import lombok.Getter;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Consumer;
 
 /**

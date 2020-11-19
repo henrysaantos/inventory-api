@@ -2,11 +2,11 @@ package com.henryfabio.minecraft.inventoryapi.editor;
 
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.item.callback.ItemCallback;
+import com.henryfabio.minecraft.inventoryapi.viewer.configuration.border.Border;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Henry Fábio
@@ -24,9 +24,9 @@ public interface InventoryEditor {
 
     void fillBorder(InventoryItem inventoryItem);
 
-    void fillPage(List<InventoryItem> inventoryItems, int borderLimit);
+    void fillPage(List<InventoryItem> inventoryItems, Border border);
 
-    void fillCenter(InventoryItem inventoryItem, int borderLimit);
+    void fillCenter(InventoryItem inventoryItem, Border border);
 
     void fillColumn(int column, InventoryItem inventoryItem);
 

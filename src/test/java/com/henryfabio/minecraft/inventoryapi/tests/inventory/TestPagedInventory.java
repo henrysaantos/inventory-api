@@ -1,10 +1,11 @@
 package com.henryfabio.minecraft.inventoryapi.tests.inventory;
 
-import com.henryfabio.minecraft.inventoryapi.inventory.configuration.impl.InventoryConfigurationImpl;
+import com.henryfabio.minecraft.inventoryapi.editor.InventoryEditor;
 import com.henryfabio.minecraft.inventoryapi.inventory.impl.paged.PagedInventory;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.item.supplier.InventoryItemSupplier;
-import com.henryfabio.minecraft.inventoryapi.viewer.configuration.ViewerConfiguration;
+import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
+import com.henryfabio.minecraft.inventoryapi.viewer.configuration.border.Border;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.impl.ViewerConfigurationImpl;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
 import org.bukkit.Material;
@@ -24,7 +25,7 @@ public final class TestPagedInventory extends PagedInventory {
         super(
                 "test.inventory.paged", // Identificador do inventário (deve ser único)
                 "&8PagedInventory", // Título padrão do inventário
-                9 * 3 // Tamanho do inventário
+                9 * 6 // Tamanho do inventário
         );
 
         // Método para configurar características do inventário (não é obrigatória a configuração)
@@ -46,9 +47,17 @@ public final class TestPagedInventory extends PagedInventory {
     protected void configureViewer(PagedViewer viewer) {
         ViewerConfigurationImpl.Paged configuration = viewer.getConfiguration();
         configuration.titleInventory("&8Seu nome: " + viewer.getName());
+        configuration.border(Border.of(2, 2, 1, 1));
 
         // As configurações do inventário são definidas automaticamente, só altere elas caso queira modificações específicas
-        configuration.itemPageLimit(7);
+//        configuration.itemPageLimit(7);
+        configuration.nextPageSlot(53);
+        configuration.previousPageSlot(46);
+    }
+
+    @Override
+    protected void configureInventory(Viewer viewer, InventoryEditor editor) {
+        editor.fillColumn(1, InventoryItem.of(new ItemStack(Material.STAINED_GLASS)));
     }
 
     /**
@@ -61,12 +70,16 @@ public final class TestPagedInventory extends PagedInventory {
     protected List<InventoryItemSupplier> createPageItems(PagedViewer viewer) {
         List<InventoryItemSupplier> itemSuppliers = new LinkedList<>();
 
-//        for (int i = 0; i < 100; i++) {
-//            itemSuppliers.add(() -> {
-//                ItemStack itemStack = new ItemStack(Material.DIRT);
-//                return InventoryItem.of(itemStack);
-//            });
-//        }
+        for (int i = 0; i < 100; i++) {
+            int finalI = i;
+            itemSuppliers.add(() -> {
+                ItemStack itemStack = new ItemStack(Material.DIRT);
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                itemMeta.setDisplayName("§e" + finalI);
+                itemStack.setItemMeta(itemMeta);
+                return InventoryItem.of(itemStack);
+            });
+        }
 
         return itemSuppliers;
     }
