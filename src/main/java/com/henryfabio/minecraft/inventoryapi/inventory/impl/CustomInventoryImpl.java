@@ -74,10 +74,10 @@ public abstract class CustomInventoryImpl implements CustomInventory {
         configureInventory(viewer, editor);
         update(viewer, editor);
 
+        player.openInventory(inventory);
+
         ViewerController viewerController = InventoryManager.getViewerController();
         viewerController.registerViewer(viewer);
-
-        player.openInventory(inventory);
     }
 
     protected void configureViewer(Viewer viewer) {

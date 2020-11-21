@@ -3,6 +3,7 @@ package com.henryfabio.minecraft.inventoryapi.tests.inventory;
 import com.henryfabio.minecraft.inventoryapi.editor.InventoryEditor;
 import com.henryfabio.minecraft.inventoryapi.inventory.impl.simple.SimpleInventory;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
+import com.henryfabio.minecraft.inventoryapi.tests.Main;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.ViewerConfiguration;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.simple.SimpleViewer;
@@ -66,7 +67,7 @@ public final class TestSimpleInventory extends SimpleInventory {
             player.sendMessage("§eVocê clicou com o botão direito!");
         }).defaultCallback(event -> { // Callback chamado quando o jogador interagir com qualquer botão com esse item
             Player player = event.getPlayer();
-            player.sendMessage("§eVocê interagiu com o inventário!");
+            Main.getPlugin(Main.class).pagedInventory.openInventory(player);
         }).updateCallback(itemStack -> { // Callback chamado quando o inventário é atualizado, tanto manualemente quanto automaticamente
             Random random = new Random();
             ItemMeta itemMeta = itemStack.getItemMeta();

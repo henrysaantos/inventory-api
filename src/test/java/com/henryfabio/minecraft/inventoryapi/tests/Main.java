@@ -19,9 +19,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class Main extends JavaPlugin implements Listener {
 
-    private final TestSimpleInventory simpleInventory = new TestSimpleInventory().init();
-    private final TestGlobalInventory globalInventory = new TestGlobalInventory().init();
-    private final TestPagedInventory pagedInventory = new TestPagedInventory().init();
+    public final TestSimpleInventory simpleInventory = new TestSimpleInventory().init();
+    public final TestGlobalInventory globalInventory = new TestGlobalInventory().init();
+    public final TestPagedInventory pagedInventory = new TestPagedInventory().init();
 
     @Override
     public void onEnable() {
