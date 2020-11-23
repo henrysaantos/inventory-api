@@ -47,11 +47,13 @@ public abstract class CustomInventoryImpl implements CustomInventory {
     public void updateInventory(Player player) {
         ViewerController viewerController = InventoryManager.getViewerController();
         viewerController.findViewer(player.getName()).ifPresent(viewer -> {
-            InventoryEditor editor = viewer.getEditor();
-            update(viewer, editor);
-            editor.updateAllItemStacks();
+            if (viewer.getCustomInventory().getClass().isInstance(this)) {
+                InventoryEditor editor = viewer.getEditor();
+                update(viewer, editor);
+                editor.updateAllItemStacks();
 
-            player.updateInventory();
+                player.updateInventory();
+            }
         });
     }
 
