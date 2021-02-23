@@ -3,8 +3,10 @@ package com.henryfabio.minecraft.inventoryapi.listener;
 import com.henryfabio.minecraft.inventoryapi.controller.ViewerController;
 import com.henryfabio.minecraft.inventoryapi.editor.InventoryEditor;
 import com.henryfabio.minecraft.inventoryapi.event.impl.CustomInventoryClickEvent;
+import com.henryfabio.minecraft.inventoryapi.event.impl.CustomInventoryCloseEvent;
 import com.henryfabio.minecraft.inventoryapi.item.callback.ItemCallback;
 import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
+import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +28,12 @@ public final class CustomInventoryListener implements Listener {
     private void onInventoryClose(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
         ViewerController viewerController = InventoryManager.getViewerController();
-        viewerController.unregisterViewer(player.getName());
+
+        Viewer viewer = viewerController.unregisterViewer(player.getName());
+        if (viewer != null) {
+            CustomInventoryCloseEvent closeEvent = new CustomInventoryCloseEvent(viewer, event);
+            Bukkit.getPluginManager().callEvent(closeEvent);
+        }
     }
 
     @EventHandler
