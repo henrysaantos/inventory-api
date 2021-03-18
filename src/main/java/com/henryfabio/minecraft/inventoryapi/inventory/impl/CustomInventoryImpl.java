@@ -10,6 +10,7 @@ import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import lombok.Data;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
@@ -33,18 +34,18 @@ public abstract class CustomInventoryImpl implements CustomInventory {
     }
 
     @Override
-    public final <T extends InventoryConfiguration> void configuration(Consumer<T> consumer) {
+    public final <T extends InventoryConfiguration> void configuration(@NotNull Consumer<T> consumer) {
         T configuration = this.getConfiguration();
         consumer.accept(configuration);
     }
 
     @Override
-    public final void openInventory(Player player) {
+    public final void openInventory(@NotNull Player player) {
         this.openInventory(player, null);
     }
 
     @Override
-    public void updateInventory(Player player) {
+    public void updateInventory(@NotNull Player player) {
         ViewerController viewerController = InventoryManager.getViewerController();
         viewerController.findViewer(player.getName()).ifPresent(viewer -> {
             if (viewer.getCustomInventory().getClass().isInstance(this)) {
@@ -58,7 +59,7 @@ public abstract class CustomInventoryImpl implements CustomInventory {
     }
 
     @Override
-    public final <T extends InventoryConfiguration> T getConfiguration() {
+    public final <T extends InventoryConfiguration> @NotNull T getConfiguration() {
         return (T) configuration;
     }
 
@@ -82,15 +83,15 @@ public abstract class CustomInventoryImpl implements CustomInventory {
         viewerController.registerViewer(viewer);
     }
 
-    protected void configureViewer(Viewer viewer) {
+    protected void configureViewer(@NotNull Viewer viewer) {
         // empty method
     }
 
-    protected void configureInventory(Viewer viewer, InventoryEditor editor) {
+    protected void configureInventory(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
         // empty method
     }
 
-    protected void update(Viewer viewer, InventoryEditor editor) {
+    protected void update(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
         // empty method
     }
 

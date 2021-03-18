@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -44,7 +45,7 @@ public final class TestSimpleInventory extends SimpleInventory {
      * @param viewer visualizador do inventário
      */
     @Override
-    protected void configureViewer(SimpleViewer viewer) {
+    protected void configureViewer(@NotNull SimpleViewer viewer) {
         ViewerConfiguration configuration = viewer.getConfiguration();
         configuration.titleInventory("&8Seu nome: " + viewer.getName());
     }
@@ -56,7 +57,7 @@ public final class TestSimpleInventory extends SimpleInventory {
      * @param editor editor do inventário
      */
     @Override
-    protected void configureInventory(Viewer viewer, InventoryEditor editor) {
+    protected void configureInventory(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
         Player viewerPlayer = viewer.getPlayer();
 
         // Item utilizado para conseguir definir callbacks para o item
@@ -86,7 +87,7 @@ public final class TestSimpleInventory extends SimpleInventory {
      * @param editor editor do inventário
      */
     @Override
-    protected void update(Viewer viewer, InventoryEditor editor) {
+    protected void update(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
         Random random = new Random();
         editor.setItem(random.nextInt(9), InventoryItem.of(new ItemStack(Material.EMERALD_BLOCK)));
     }

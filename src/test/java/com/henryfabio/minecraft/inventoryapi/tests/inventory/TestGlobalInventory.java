@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Henry Fábio
@@ -32,7 +33,7 @@ public final class TestGlobalInventory extends GlobalInventory {
      * @param editor editor do inventário
      */
     @Override
-    protected void configureInventory(InventoryEditor editor) {
+    protected void configureInventory(@NotNull InventoryEditor editor) {
         editor.setItem(13, InventoryItem.of(
                 new ItemStack(Material.STONE)
         ).callback(ClickType.RIGHT, event -> {

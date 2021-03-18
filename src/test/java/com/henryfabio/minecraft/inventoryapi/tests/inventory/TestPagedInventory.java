@@ -11,6 +11,7 @@ import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -44,7 +45,7 @@ public final class TestPagedInventory extends PagedInventory {
      * @param viewer visualizador do inventário
      */
     @Override
-    protected void configureViewer(PagedViewer viewer) {
+    protected void configureViewer(@NotNull PagedViewer viewer) {
         ViewerConfigurationImpl.Paged configuration = viewer.getConfiguration();
         configuration.titleInventory("&8Seu nome: " + viewer.getName());
         configuration.border(Border.of(2, 2, 1, 1));
@@ -56,7 +57,7 @@ public final class TestPagedInventory extends PagedInventory {
     }
 
     @Override
-    protected void configureInventory(Viewer viewer, InventoryEditor editor) {
+    protected void configureInventory(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
         editor.fillColumn(1, InventoryItem.of(new ItemStack(Material.STAINED_GLASS)));
     }
 
@@ -67,7 +68,7 @@ public final class TestPagedInventory extends PagedInventory {
      * @return lista dos itens de todas as páginas
      */
     @Override
-    protected List<InventoryItemSupplier> createPageItems(PagedViewer viewer) {
+    protected List<InventoryItemSupplier> createPageItems(@NotNull PagedViewer viewer) {
         List<InventoryItemSupplier> itemSuppliers = new LinkedList<>();
 
         for (int i = 0; i < 100; i++) {

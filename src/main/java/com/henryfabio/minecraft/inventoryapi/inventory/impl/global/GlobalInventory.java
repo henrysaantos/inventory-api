@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
@@ -28,7 +29,7 @@ public abstract class GlobalInventory extends CustomInventoryImpl {
     }
 
     @Override
-    public final <T extends Viewer> void openInventory(Player player, Consumer<T> viewerConsumer) {
+    public final <T extends Viewer> void openInventory(@NotNull Player player, Consumer<T> viewerConsumer) {
         createInventoryEditor();
 
         Viewer viewer = new GlobalViewer(player.getName(), this);
@@ -43,30 +44,30 @@ public abstract class GlobalInventory extends CustomInventoryImpl {
     }
 
     @Override
-    public final void updateInventory(Player player) {
+    public final void updateInventory(@NotNull Player player) {
         this.updateInventory();
     }
 
     @Override
-    protected final void configureViewer(Viewer viewer) {
+    protected final void configureViewer(@NotNull Viewer viewer) {
         //
     }
 
-    protected void configureInventory(InventoryEditor editor) {
+    protected void configureInventory(@NotNull InventoryEditor editor) {
         // empty method
     }
 
     @Override
-    protected final void configureInventory(Viewer viewer, InventoryEditor editor) {
+    protected final void configureInventory(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
         //
     }
 
-    protected void update(InventoryEditor editor) {
+    protected void update(@NotNull InventoryEditor editor) {
         // empty method
     }
 
     @Override
-    protected final void update(Viewer viewer, InventoryEditor editor) {
+    protected final void update(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
         this.update(this.inventoryEditor);
     }
 

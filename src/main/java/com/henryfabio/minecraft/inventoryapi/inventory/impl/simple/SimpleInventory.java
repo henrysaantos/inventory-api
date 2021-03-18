@@ -5,6 +5,7 @@ import com.henryfabio.minecraft.inventoryapi.inventory.impl.CustomInventoryImpl;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.simple.SimpleViewer;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
@@ -19,22 +20,22 @@ public abstract class SimpleInventory extends CustomInventoryImpl {
     }
 
     @Override
-    public final <T extends Viewer> void openInventory(Player player, Consumer<T> viewerConsumer) {
+    public final <T extends Viewer> void openInventory(@NotNull Player player, Consumer<T> viewerConsumer) {
         Viewer viewer = new SimpleViewer(player.getName(), this);
         defaultOpenInventory(player, viewer, viewerConsumer);
     }
 
     @Override
-    public final void updateInventory(Player player) {
+    public final void updateInventory(@NotNull Player player) {
         super.updateInventory(player);
     }
 
-    protected void configureViewer(SimpleViewer viewer) {
+    protected void configureViewer(@NotNull SimpleViewer viewer) {
         // empty method
     }
 
     @Override
-    protected final void configureViewer(Viewer viewer) {
+    protected final void configureViewer(@NotNull Viewer viewer) {
         this.configureViewer(((SimpleViewer) viewer));
     }
 
