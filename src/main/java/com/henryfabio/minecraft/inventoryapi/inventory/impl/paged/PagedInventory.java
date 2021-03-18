@@ -47,7 +47,7 @@ public abstract class PagedInventory extends CustomInventoryImpl {
     }
 
     @Override
-    protected void update(Viewer viewer, InventoryEditor editor) {
+    protected final void update(Viewer viewer, InventoryEditor editor) {
         PagedViewer pagedViewer = (PagedViewer) viewer;
         this.update(pagedViewer, editor);
 
