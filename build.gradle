@@ -25,9 +25,9 @@ dependencies {
     compileOnly spigot
     testCompileOnly spigot
 
-    api 'org.jetbrains:annotations:16.0.2'
+    api 'org.jetbrains:annotations:21.0.1'
 
-    def lombok = 'org.projectlombok:lombok:1.18.12'
+    def lombok = 'org.projectlombok:lombok:1.18.20'
     compileOnly lombok
     annotationProcessor lombok
 
