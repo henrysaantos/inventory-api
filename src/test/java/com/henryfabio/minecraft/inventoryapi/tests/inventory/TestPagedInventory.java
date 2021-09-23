@@ -4,6 +4,7 @@ import com.henryfabio.minecraft.inventoryapi.editor.InventoryEditor;
 import com.henryfabio.minecraft.inventoryapi.inventory.impl.paged.PagedInventory;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
 import com.henryfabio.minecraft.inventoryapi.item.supplier.InventoryItemSupplier;
+import com.henryfabio.minecraft.inventoryapi.item.util.MaterialUtil;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.border.Border;
 import com.henryfabio.minecraft.inventoryapi.viewer.configuration.impl.ViewerConfigurationImpl;
@@ -24,9 +25,9 @@ public final class TestPagedInventory extends PagedInventory {
 
     public TestPagedInventory() {
         super(
-                "test.inventory.paged", // Identificador do inventário (deve ser único)
-                "&8PagedInventory", // Título padrão do inventário
-                9 * 6 // Tamanho do inventário
+            "test.inventory.paged", // Identificador do inventário (deve ser único)
+            "&8PagedInventory", // Título padrão do inventário
+            9 * 6 // Tamanho do inventário
         );
 
         // Método para configurar características do inventário (não é obrigatória a configuração)
@@ -58,7 +59,7 @@ public final class TestPagedInventory extends PagedInventory {
 
     @Override
     protected void configureInventory(@NotNull Viewer viewer, @NotNull InventoryEditor editor) {
-        editor.fillColumn(1, InventoryItem.of(new ItemStack(Material.STAINED_GLASS)));
+        editor.fillColumn(1, InventoryItem.of(MaterialUtil.convertFromLegacy("STAINED_GLASS", 0)));
     }
 
     /**
