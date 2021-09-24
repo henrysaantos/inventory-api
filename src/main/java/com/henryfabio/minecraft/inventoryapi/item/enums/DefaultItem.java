@@ -2,6 +2,7 @@ package com.henryfabio.minecraft.inventoryapi.item.enums;
 
 import com.henryfabio.minecraft.inventoryapi.controller.InventoryController;
 import com.henryfabio.minecraft.inventoryapi.item.InventoryItem;
+import com.henryfabio.minecraft.inventoryapi.item.util.MaterialUtil;
 import com.henryfabio.minecraft.inventoryapi.manager.InventoryManager;
 import com.henryfabio.minecraft.inventoryapi.viewer.Viewer;
 import com.henryfabio.minecraft.inventoryapi.viewer.impl.paged.PagedViewer;
@@ -26,14 +27,14 @@ public enum DefaultItem {
         itemStack.setItemMeta(itemMeta);
 
         return InventoryItem.of(itemStack)
-                .defaultCallback(event -> {
-                    String backInventory = viewer.getConfiguration().backInventory();
-                    if (backInventory == null) return;
+            .defaultCallback(event -> {
+                String backInventory = viewer.getConfiguration().backInventory();
+                if (backInventory == null) return;
 
-                    InventoryController inventoryController = InventoryManager.getInventoryController();
-                    inventoryController.findInventory(backInventory)
-                            .ifPresent(inventory -> inventory.openInventory(viewer.getPlayer()));
-                });
+                InventoryController inventoryController = InventoryManager.getInventoryController();
+                inventoryController.findInventory(backInventory)
+                    .ifPresent(inventory -> inventory.openInventory(viewer.getPlayer()));
+            });
     }),
     CLOSE(viewer -> {
         ItemStack itemStack = new ItemStack(Material.BARRIER);
@@ -42,13 +43,13 @@ public enum DefaultItem {
         itemStack.setItemMeta(itemMeta);
 
         return InventoryItem.of(itemStack)
-                .defaultCallback(event -> {
-                    Player player = event.getViewer().getPlayer();
-                    player.closeInventory();
-                });
+            .defaultCallback(event -> {
+                Player player = event.getViewer().getPlayer();
+                player.closeInventory();
+            });
     }),
     EMPTY(viewer -> {
-        ItemStack itemStack = new ItemStack(Material.WEB);
+        ItemStack itemStack = MaterialUtil.convertFromLegacy("WEB", 0);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName("§cVazio");
         itemStack.setItemMeta(itemMeta);
@@ -67,7 +68,7 @@ public enum DefaultItem {
         itemStack.setItemMeta(itemMeta);
 
         return InventoryItem.of(itemStack)
-                .defaultCallback(event -> pagedViewer.nextPage());
+            .defaultCallback(event -> pagedViewer.nextPage());
     }),
     PREVIOUS_PAGE(viewer -> {
         if (!(viewer instanceof PagedViewer))
@@ -81,7 +82,7 @@ public enum DefaultItem {
         itemStack.setItemMeta(itemMeta);
 
         return InventoryItem.of(itemStack)
-                .defaultCallback(event -> pagedViewer.previousPage());
+            .defaultCallback(event -> pagedViewer.previousPage());
     });
 
     @Setter private DefaultItemSupplier itemSupplier;
